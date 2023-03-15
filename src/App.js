@@ -1,8 +1,10 @@
+import Home from "./Home";
 
-function App() {
+function App(){
   return (
-    <div >
-    </div>
+    <>
+      < Home/>
+    </>
   );
 }
 
