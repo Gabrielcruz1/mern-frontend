@@ -1,7 +1,7 @@
 function Home(){
     return(
         <div> 
-            <h1>"Hello world!"</h1>
+            <h1>"MERN Full Stack application"</h1>
         </div>
     )
 }
