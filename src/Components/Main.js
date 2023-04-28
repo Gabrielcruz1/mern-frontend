@@ -1,4 +1,4 @@
-function Home(){
+function Main(){
     return(
         <div> 
             <h1>"MERN Full Stack application"</h1>
@@ -6,4 +6,4 @@ function Home(){
     )
 }
 
-export default Home;
+export default Main;
