@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
 
 const PostComponent = (props) => {
     const [post, setPost] = useState([])
@@ -62,11 +63,12 @@ const PostComponent = (props) => {
         return post.map((post) => {
             return (
                 <div key={post._id} className="postsThatAreMapped">
-                    
+                    <Link to={`/posts/${post._id}`}> 
                     <p> The Post/Product -- {post.title}</p>
                     <p>The Post/Product Description -- {post.description}</p>
                     <img src={post.image} style={{ width: 400, height: 300 }} />
                     <p>The Price/Possibly something else -- {post.price}</p>
+                    </Link>
                 </div>
             );
         });
