@@ -10,7 +10,6 @@ const Main = () => {
                 <Route path="/" element={< PostComponent />} />
                 <Route path="/posts/:id" element={< ShowComponent />} />
             </Routes>
-            <h1>Main Component/ Hero</h1>
         </main>
     )
 }

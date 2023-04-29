@@ -22,7 +22,7 @@ const PostComponent = (props) => {
     console.log(`There are ${post.length} posts available to render`)
 
     const loaded = () => {
-        return post.map((el) => {
+        return post.map((post) => {
             return (
                 <div key={post._id}>
                     <p>{post.title}</p>
@@ -52,7 +52,7 @@ const PostComponent = (props) => {
 
 
     return (
-        <section className="people-list">
+        <section>
             {post && post.length ? loaded() : loading()}
         </section>
     )
