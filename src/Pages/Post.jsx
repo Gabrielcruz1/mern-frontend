@@ -2,6 +2,14 @@ import { useState, useEffect } from 'react';
 
 const PostComponent = (props) => {
     const [post, setPost] = useState([])
+    // state for formData
+    const [newForm, setNewForm] = useState({
+        title: "",
+        description: "",
+        image: "",
+        price: "",
+    });
+
 
     const BASE_URL = "http://localhost:4000/posts"
 
@@ -15,20 +23,50 @@ const PostComponent = (props) => {
         }
     }
 
+    const handleChange = (e) => {
+        setNewForm({ ...newForm, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
+
+        e.preventDefault()
+        const newPost = await createPost()
+
+        // reset the form
+        setNewForm({ title: "", description: "", image: "", price: "" })
+    }
+
+
+    const createPost = async (postData) => {
+        try {
+            const newPost = await fetch(URL, {
+                method: "post",
+                headers: {
+                    "Content-Type": "appliation/json"
+                },
+                body: JSON.stringify(postData)
+            });
+            // trigger fetch of updated post to replace stale content
+            getPost();
+
+        } catch (err) {
+            console.log(err)
+        }
+    };
+
     useEffect(() => {
         getPost()
     }, [])
 
-    console.log(`There are ${post.length} posts available to render`)
-
     const loaded = () => {
         return post.map((post) => {
             return (
-                <div key={post._id}>
-                    <p>{post.title}</p>
-                    <p>{post.description}</p>
-                    <img src={post.image} />
-                    <p>{post.price}</p>
+                <div key={post._id} className="postsThatAreMapped">
+                    
+                    <p> The Post/Product -- {post.title}</p>
+                    <p>The Post/Product Description -- {post.description}</p>
+                    <img src={post.image} style={{ width: 400, height: 300 }} />
+                    <p>The Price/Possibly something else -- {post.price}</p>
                 </div>
             );
         });
@@ -48,7 +86,33 @@ const PostComponent = (props) => {
         </section>
     );
 
-
+    <section>
+        <h2>Create a new post</h2>
+        <form onSubmit={handleSubmit}>
+            <input
+                type="text"
+                value={newForm.title}
+                name="title"
+                placeholder="title"
+                onChange={handleChange}
+            />
+            <input
+                type="text"
+                value={newForm.description}
+                name="descrption"
+                placeholder="description"
+                onChange={handleChange}
+            />
+            <input
+                type="text"
+                value={newForm.image}
+                name="image"
+                placeholder="image"
+                onChange={handleChange}
+            />
+            <input type="submit" value="Create Person" />
+        </form>
+    </section>
 
 
     return (
