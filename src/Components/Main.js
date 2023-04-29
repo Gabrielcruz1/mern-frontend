@@ -1,7 +1,7 @@
 function Main(){
     return(
         <div> 
-            <h1>"MERN Full Stack application"</h1>
+            <h1>Main Component/ Hero</h1>
         </div>
     )
 }
