@@ -29,10 +29,8 @@ const PostComponent = (props) => {
     };
 
     const handleSubmit = async (e) => {
-
         e.preventDefault()
         const newPost = await createPost()
-
         // reset the form
         setNewForm({ title: "", description: "", image: "", price: "" })
     }
@@ -112,7 +110,14 @@ const PostComponent = (props) => {
                 placeholder="image"
                 onChange={handleChange}
             />
-            <input type="submit" value="Create Person" />
+             <input
+                type="text"
+                value={newForm.price}
+                name="price"
+                placeholder="price"
+                onChange={handleChange}
+            />
+            <input type="submit" value="Create Post" />
         </form>
     </section>
 
