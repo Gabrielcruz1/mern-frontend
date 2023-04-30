@@ -60,14 +60,52 @@ const PostComponent = (props) => {
     const loaded = () => {
         return post.map((post) => {
             return (
-                <div key={post._id} className="postsThatAreMapped">
-                    <Link to={`/posts/${post._id}`}> 
-                    <p> The Post/Product -- {post.title}</p>
-                    <p>The Post/Product Description -- {post.description}</p>
-                    <img src={post.image} style={{ width: 400, height: 300 }} />
-                    <p>The Price/Possibly something else -- {post.price}</p>
-                    </Link>
-                </div>
+                <>
+                    <div key={post._id} className="postsThatAreMapped">
+                        <Link to={`/posts/${post._id}`}>
+                            <p> The Post/Product -- {post.title}</p>
+                            <p>The Post/Product Description -- {post.description}</p>
+                            <img src={post.image} style={{ width: 400, height: 300 }} />
+                            <p>The Price/Possibly something else -- {post.price}</p>
+                        </Link>
+                        </div>
+                        <div className="createPostInputFields">
+                        <section>
+                            <h2>Create a new post</h2>
+                            <form onSubmit={handleSubmit}>
+                                <input
+                                    type="text"
+                                    value={newForm.title}
+                                    name="title"
+                                    placeholder="title"
+                                    onChange={handleChange}
+                                />
+                                <input
+                                    type="text"
+                                    value={newForm.description}
+                                    name="descrption"
+                                    placeholder="description"
+                                    onChange={handleChange}
+                                />
+                                <input
+                                    type="text"
+                                    value={newForm.image}
+                                    name="image"
+                                    placeholder="image"
+                                    onChange={handleChange}
+                                />
+                                <input
+                                    type="text"
+                                    value={newForm.price}
+                                    name="price"
+                                    placeholder="price"
+                                    onChange={handleChange}
+                                />
+                                <input type="submit" value="Create Post" />
+                            </form>
+                        </section>
+                    </div>
+                </>
             );
         });
     };
@@ -85,41 +123,6 @@ const PostComponent = (props) => {
             </h1>
         </section>
     );
-
-    <section>
-        <h2>Create a new post</h2>
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                value={newForm.title}
-                name="title"
-                placeholder="title"
-                onChange={handleChange}
-            />
-            <input
-                type="text"
-                value={newForm.description}
-                name="descrption"
-                placeholder="description"
-                onChange={handleChange}
-            />
-            <input
-                type="text"
-                value={newForm.image}
-                name="image"
-                placeholder="image"
-                onChange={handleChange}
-            />
-             <input
-                type="text"
-                value={newForm.price}
-                name="price"
-                placeholder="price"
-                onChange={handleChange}
-            />
-            <input type="submit" value="Create Post" />
-        </form>
-    </section>
 
 
     return (
