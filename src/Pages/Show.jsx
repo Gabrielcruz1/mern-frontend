@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useParams  } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 // import PostComponent from './Post';
 
 const ShowComponent = (props) => {
   const [post, setPost] = useState(null)
   const { id } = useParams()
+  const navigate = useNavigate()
   const URL = `http://localhost:4000/posts/${id}`
 
   const getPost = async () => {
@@ -17,17 +18,38 @@ const ShowComponent = (props) => {
     }
   }
 
+  const removePost = async () => {
+    try {
+      const options = {
+        method: "DELETE"
+      }
+      const response = await fetch(URL, options)
+      const deletedPost = await response.json()
+      navigate('/')
+      // navigate will change the browser's URL
+      // whic
+    } catch (err) {
+      console.log(err);
+      navigate(URL)
+    }
+  }
+
   useEffect(() => {
     getPost();
   }, [])
 
   const loaded = () => {
+    return (
     <div>
       <h1>Show Page</h1>
       <h2>{post.title}</h2>
       <p>{post.description}</p>
       <img src={post.image} alt={post.name + "image"} />
+      <div>
+        <button onClick={removePost}> Remove Post</button>
+      </div>
     </div>
+    )
   }
 
   const loading = () => {
@@ -44,7 +66,7 @@ const ShowComponent = (props) => {
     </section>
   };
 
-  return post && post.length ? loaded() : loading()
+  return post ? loaded() : loading()
 }
 
 export default ShowComponent
