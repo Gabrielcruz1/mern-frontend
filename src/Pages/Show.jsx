@@ -44,7 +44,7 @@ const ShowComponent = (props) => {
       <h1>Show Page</h1>
       <h2>{post.title}</h2>
       <p>{post.description}</p>
-      <img src={post.image} alt={post.name + "image"} />
+      <img style={{height:300, width:400 }} src={post.image} alt={post.name + "image"} />
       <div>
         <button onClick={removePost}> Remove Post</button>
       </div>
