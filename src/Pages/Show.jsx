@@ -4,9 +4,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 const ShowComponent = (props) => {
   const [post, setPost] = useState(null)
+  const [editForm, setEditForm] = useState(post)
   const { id } = useParams()
   const navigate = useNavigate()
   const URL = `http://localhost:4000/posts/${id}`
+
 
   const getPost = async () => {
     try {
@@ -34,6 +36,27 @@ const ShowComponent = (props) => {
     }
   }
 
+  const updatePost = async (e) => {
+    e.preventDefault()
+    try{
+      await fetch(URL, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(editForm)
+      })
+      // trigger a re-render after the fetch is complete
+      getPost()
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+  const handleChange = event => {
+    setEditForm({...editForm, [event.target.name] : event.target.value })
+  }
+
   useEffect(() => {
     getPost();
   }, [])
@@ -48,6 +71,9 @@ const ShowComponent = (props) => {
       <div>
         <button onClick={removePost}> Remove Post</button>
       </div>
+      <section>
+        <h2>Edit this post</h2>
+      </section>
     </div>
     )
   }
