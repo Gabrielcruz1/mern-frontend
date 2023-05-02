@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 const ShowComponent = (props) => {
   const [post, setPost] = useState(null)
-  const [editForm, setEditForm] = useState(post)
+  const [editForm, setEditForm] = useState("")
   const { id } = useParams()
   const navigate = useNavigate()
   const URL = `http://localhost:4000/posts/${id}`
@@ -53,9 +53,8 @@ const ShowComponent = (props) => {
     }
   }
 
-  const handleChange = event => {
+  const handleChange = (event) => 
     setEditForm({...editForm, [event.target.name] : event.target.value })
-  }
 
   useEffect(() => {
     getPost();
@@ -73,6 +72,37 @@ const ShowComponent = (props) => {
       </div>
       <section>
         <h2>Edit this post</h2>
+        <form onSubmit={updatePost}>
+          <input 
+            type="text"
+            value={editForm.title}
+            name="name"
+            placeholder="title"
+            onChange={handleChange}
+          /> 
+           <input 
+            type="text"
+            value={editForm.description}
+            name="description"
+            placeholder="description"
+            onChange={handleChange}
+          /> 
+           <input 
+            type="text"
+            value={editForm.image}
+            name="image"
+            placeholder="image url"
+            onChange={handleChange}
+          /> 
+           <input 
+            type="text"
+            value={editForm.price}
+            name="price"
+            placeholder="price"
+            onChange={handleChange}
+          /> 
+           <input type="submit" value="Update Post" />
+        </form>
       </section>
     </div>
     )
