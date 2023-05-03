@@ -5,7 +5,7 @@ import PostComponent from '../Pages/Post';
 import ShowComponent from '../Pages/Show';
 
 
-const Main = () => {
+const Main = (props) => {
     return (
         <main>
             <Routes>
