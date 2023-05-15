@@ -83,7 +83,7 @@ const PostComponent = (props) => {
                                 <input
                                     type="text"
                                     value={newForm.description}
-                                    name="descrption"
+                                    name="description"
                                     placeholder="description"
                                     onChange={handleChange}
                                 />
