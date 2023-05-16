@@ -68,42 +68,6 @@ const PostComponent = (props) => {
                             <img src={post.image} style={{ width: 400, height: 300 }} />
                             <p>The Price/Possibly something else -- {post.price}</p>
                         </Link>
-                        </div>
-                        <div className="createPostInputFields">
-                        <section>
-                            <h2>Create a new post</h2>
-                            <form onSubmit={handleSubmit}>
-                                <input
-                                    type="text"
-                                    value={newForm.title}
-                                    name="title"
-                                    placeholder="title"
-                                    onChange={handleChange}
-                                />
-                                <input
-                                    type="text"
-                                    value={newForm.description}
-                                    name="description"
-                                    placeholder="description"
-                                    onChange={handleChange}
-                                />
-                                <input
-                                    type="text"
-                                    value={newForm.image}
-                                    name="image"
-                                    placeholder="image"
-                                    onChange={handleChange}
-                                />
-                                <input
-                                    type="text"
-                                    value={newForm.price}
-                                    name="price"
-                                    placeholder="price"
-                                    onChange={handleChange}
-                                />
-                                <input type="submit" value="Create Post" />
-                            </form>
-                        </section>
                     </div>
                 </>
             );
@@ -126,9 +90,44 @@ const PostComponent = (props) => {
 
 
     return (
-        <section>
-            {post && post.length ? loaded() : loading()}
-        </section>
+        <div className="createPostInputFields">
+            <section>
+                <h2>Create a new post</h2>
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        value={newForm.title}
+                        name="title"
+                        placeholder="title"
+                        onChange={handleChange}
+                    />
+                    <input
+                        type="text"
+                        value={newForm.description}
+                        name="description"
+                        placeholder="description"
+                        onChange={handleChange}
+                    />
+                    <input
+                        type="text"
+                        value={newForm.image}
+                        name="image"
+                        placeholder="image"
+                        onChange={handleChange}
+                    />
+                    <input
+                        type="text"
+                        value={newForm.price}
+                        name="price"
+                        placeholder="price"
+                        onChange={handleChange}
+                    />
+                    <input type="submit" value="Create Post" />
+                </form>
+            </section>
+            { post && post.length ? loaded() : loading() }
+        </div >
+
     )
 }
 
