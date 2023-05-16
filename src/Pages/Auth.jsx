@@ -1,8 +1,9 @@
 import userEvent from '@testing-library/user-event';
 import { useContext } from 'react';
 import { UserContext } from '../Data'
-import { setUserToken, clearUserToken } from '../utils/authToken'
+import { getUserToken, setUserToken, clearUserToken } from '../utils/authToken'
 import RegisterForm from '../Components/RegisterForm';
+import LoginForm from '../Components/LoginForm'
 
 
 function Auth() {
@@ -51,9 +52,46 @@ function Auth() {
         }
     }
 
+    const loginUser = async (data) => {
+        try {
+            const configs = {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+    
+            const response = await fetch(
+                "http://localhost:4000/auth/login",
+                configs
+            )
+    
+            const currentUser = await response.json()
+            //console.log(currentUser)
+    
+            if (currentUser.token) {
+                // sets local storage
+                setUserToken(currentUser.token)
+                // put the returned user object in state
+                setUser(currentUser.user)
+                setAuth(currentUser.isLoggedIn)
+    
+                return currentUser
+            } else {
+                throw `Server Error: ${currentUser.statusText}`
+            }
+        } catch (err) {
+            console.log(err)
+            clearUserToken();
+            setAuth(false);
+        }
+    }
+
     return (
         <section className='container'>
             <RegisterForm signUp={registerUser} />
+            <LoginForm signIn={loginUser} />
         </section>
     )
 }
