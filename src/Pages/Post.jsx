@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
+import { getUserToken } from '../utils/authToken';
 
 const PostComponent = (props) => {
+
+    const token = getUserToken()
     const [post, setPost] = useState([])
     // state for formData
     const [newForm, setNewForm] = useState({
@@ -26,32 +29,45 @@ const PostComponent = (props) => {
 
     const handleChange = (e) => {
         setNewForm({ ...newForm, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        const newPost = await createPost()
-        // reset the form
-        setNewForm({ title: "", description: "", image: "", price: "" })
     }
 
-
-    const createPost = async (postData) => {
+    const handleSubmit = async (e) => {
+        // 0. prevent default (event object method)
+        e.preventDefault()
+        // 1. capturing our local state
+        const currentState = { ...newForm }
+        // check any fields for property data types / truthy value (function call - stretch)
         try {
-            const newPost = await fetch(URL, {
-                method: "post",
+            const requestOptions = {
+                method: "POST",
                 headers: {
-                    "Content-Type": "appliation/json"
+                    "Content-Type": "application/json",
+                    "Authorization":  `Bearer ${token}`
                 },
-                body: JSON.stringify(postData)
-            });
-            // trigger fetch of updated post to replace stale content
-            getPost();
+                body: JSON.stringify(currentState)
+            }
+            // 2. specify request method , headers, Content-Type
+            // 3. make fetch to BE - sending data (requestOptions)
+
+            // 3a fetch sends the data to API - (mongo)
+            const response = await fetch(BASE_URL, requestOptions)
+            // 4. check our response - 
+            // 5. parse the data from the response into JS (from JSON) 
+            const createdPost = await response.json()
+            // update local state with response (json from be)
+            setPost([...post, createdPost])
+            // reset newForm state so that our form empties out
+            setNewForm({
+                title: "",
+                description: "",
+                image: "",
+                price: ""
+            })
 
         } catch (err) {
             console.log(err)
         }
-    };
+    }
 
     useEffect(() => {
         getPost()
@@ -125,7 +141,7 @@ const PostComponent = (props) => {
                     <input type="submit" value="Create Post" />
                 </form>
             </section>
-            { post && post.length ? loaded() : loading() }
+            {post && post.length ? loaded() : loading()}
         </div >
 
     )
