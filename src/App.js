@@ -1,3 +1,4 @@
+import "./Styling/App.css"
 import { UserContext } from "./Data";
 import { useState, useEffect, useContext } from 'react'
 import Main from "./Components/Main";

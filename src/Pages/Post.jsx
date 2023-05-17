@@ -1,3 +1,4 @@
+import "../Styling/Post.css"
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import { getUserToken } from '../utils/authToken';
@@ -42,7 +43,7 @@ const PostComponent = (props) => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization":  `Bearer ${token}`
+                    "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify(currentState)
             }
