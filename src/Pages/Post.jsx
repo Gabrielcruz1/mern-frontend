@@ -92,7 +92,7 @@ const PostComponent = (props) => {
     };
 
     const loading = () => (
-        <section>
+        <section className="loadingFunctionSection">
             <h1>
                 Loading...
                 <span>
