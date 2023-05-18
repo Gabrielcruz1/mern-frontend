@@ -1,6 +1,9 @@
 .postsThatAreMapped{
     
 }
+.createPostInputFields{
+    text-align: center;
+}
 .spinner{
     height: 50px; 
     width: 50px;
