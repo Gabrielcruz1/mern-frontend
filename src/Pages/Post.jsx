@@ -78,13 +78,14 @@ const PostComponent = (props) => {
         return post.map((post) => {
             return (
                 <>
-                    <div key={post._id} className="postsThatAreMapped">
+                    <div key={post._id} className="mappedPosts">
                         <Link to={`/posts/${post._id}`}>
-                            <p> The Post/Product -- {post.title}</p>
-                            <p>The Post/Product Description -- {post.description}</p>
-                            <img src={post.image} style={{ width: 400, height: 300 }} />
-                            <p>The Price/Possibly something else -- {post.price}</p>
+                            <p> Product -- {post.title}</p>
+                            <p>Description -- {post.description}</p>
+                            <img src={post.image} style={{ width: 80, height: 80 }} />
+                            <p>Price -- {post.price}</p>
                         </Link>
+
                     </div>
                 </>
             );
@@ -108,7 +109,7 @@ const PostComponent = (props) => {
 
     return (
         <div className="createPostInputFields">
-            <section>
+            <section >
                 <h2>Create a new post</h2>
                 <form onSubmit={handleSubmit}>
                     <input
