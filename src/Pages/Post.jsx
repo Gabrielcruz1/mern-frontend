@@ -108,8 +108,8 @@ const PostComponent = (props) => {
 
 
     return (
-        <div className="createPostInputFields">
-            <section >
+        <div >
+            <section className="createPostInputFields">
                 <h2>Create a new post</h2>
                 <form onSubmit={handleSubmit}>
                     <input
@@ -143,7 +143,9 @@ const PostComponent = (props) => {
                     <input type="submit" value="Create Post" />
                 </form>
             </section>
+            <div className="test">
             {post && post.length ? loaded() : loading()}
+            </div>
         </div >
 
     )

@@ -1,16 +1,12 @@
 .createPostInputFields{
     border: solid black;
-    border-radius: 50px;
+    border-radius: 10px;
     text-align: center;
 }
+/* individual post */
 .mappedPosts{
-    width: 300px;
     border: solid black;
-    border-radius: 50px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    border-radius: 10px;
 }
 .spinner{
     height: 50px; 
@@ -18,5 +14,8 @@
 }
 .loadingFunctionSection{
     text-align: center;
+}
+.test{
+    display: flex;
 }
 
