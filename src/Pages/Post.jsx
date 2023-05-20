@@ -143,7 +143,7 @@ const PostComponent = (props) => {
                     <input type="submit" value="Create Post" />
                 </form>
             </section>
-            <div className="test">
+            <div className="postsRendered">
             {post && post.length ? loaded() : loading()}
             </div>
         </div >

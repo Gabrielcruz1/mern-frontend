@@ -1,3 +1,4 @@
+import "../Styling/Show.css"
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 // import PostComponent from './Post';
@@ -38,7 +39,7 @@ const ShowComponent = (props) => {
 
   const updatePost = async (e) => {
     e.preventDefault()
-    try{
+    try {
       await fetch(URL, {
         method: "PUT",
         headers: {
@@ -48,13 +49,13 @@ const ShowComponent = (props) => {
       })
       // trigger a re-render after the fetch is complete
       getPost()
-    }catch(err){
+    } catch (err) {
       console.log(err)
     }
   }
 
-  const handleChange = (event) => 
-    setEditForm({...editForm, [event.target.name] : event.target.value })
+  const handleChange = (event) =>
+    setEditForm({ ...editForm, [event.target.name]: event.target.value })
 
   useEffect(() => {
     getPost();
@@ -62,49 +63,49 @@ const ShowComponent = (props) => {
 
   const loaded = () => {
     return (
-    <div>
-      <h1>Show Page</h1>
-      <h2>{post.title}</h2>
-      <p>{post.description}</p>
-      <img style={{height:300, width:400 }} src={post.image} alt={post.name + "image"} />
       <div>
-        <button onClick={removePost}> Remove Post</button>
+        <div className="individualItemForShowPage">
+          <h1>Show Page</h1>
+          <h2>{post.title}</h2>
+          <p>{post.description}</p>
+          <img style={{ height: 300, width: 400 }} src={post.image} alt={post.name + "image"} />
+          <div> <button onClick={removePost}> Remove Post</button>  </div>
+        </div>
+        <section className="editPostInputFields">
+          <h2>Edit this post</h2>
+          <form onSubmit={updatePost}>
+            <input
+              type="text"
+              value={editForm.title}
+              name="name"
+              placeholder="title"
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              value={editForm.description}
+              name="description"
+              placeholder="description"
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              value={editForm.image}
+              name="image"
+              placeholder="image url"
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              value={editForm.price}
+              name="price"
+              placeholder="price"
+              onChange={handleChange}
+            />
+            <input type="submit" value="Update Post" />
+          </form>
+        </section>
       </div>
-      <section>
-        <h2>Edit this post</h2>
-        <form onSubmit={updatePost}>
-          <input 
-            type="text"
-            value={editForm.title}
-            name="name"
-            placeholder="title"
-            onChange={handleChange}
-          /> 
-           <input 
-            type="text"
-            value={editForm.description}
-            name="description"
-            placeholder="description"
-            onChange={handleChange}
-          /> 
-           <input 
-            type="text"
-            value={editForm.image}
-            name="image"
-            placeholder="image url"
-            onChange={handleChange}
-          /> 
-           <input 
-            type="text"
-            value={editForm.price}
-            name="price"
-            placeholder="price"
-            onChange={handleChange}
-          /> 
-           <input type="submit" value="Update Post" />
-        </form>
-      </section>
-    </div>
     )
   }
 
