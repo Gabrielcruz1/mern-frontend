@@ -1,11 +1,13 @@
 import "../Styling/Show.css"
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { getUserToken } from "../utils/authToken";
 // import PostComponent from './Post';
 
 const ShowComponent = (props) => {
   const [post, setPost] = useState(null)
   const [editForm, setEditForm] = useState("")
+  const token = getUserToken()
   const { id } = useParams()
   const navigate = useNavigate()
   const URL = `http://localhost:4000/posts/${id}`
@@ -24,7 +26,10 @@ const ShowComponent = (props) => {
   const removePost = async () => {
     try {
       const options = {
-        method: "DELETE"
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       }
       const response = await fetch(URL, options)
       const deletedPost = await response.json()

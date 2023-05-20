@@ -45,7 +45,7 @@ const LoginForm = ({ signIn }) => {
                 />
                 <br />
                 <br />
-                <input type="submit" value="Sign Up" />
+                <input type="submit" value="Login User" />
             </form>
         </>
     );

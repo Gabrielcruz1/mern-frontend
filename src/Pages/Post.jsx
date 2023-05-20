@@ -111,7 +111,7 @@ const PostComponent = (props) => {
         <div >
             <section className="createPostInputFields">
                 <h2>Create a new post</h2>
-                <form onSubmit={handleSubmit}>
+                {token ? <form onSubmit={handleSubmit}>
                     <input
                         type="text"
                         value={newForm.title}
@@ -141,10 +141,10 @@ const PostComponent = (props) => {
                         onChange={handleChange}
                     />
                     <input type="submit" value="Create Post" />
-                </form>
+                </form> : null}
             </section>
             <div className="postsRendered">
-            {post && post.length ? loaded() : loading()}
+                {post && post.length ? loaded() : loading()}
             </div>
         </div >
 

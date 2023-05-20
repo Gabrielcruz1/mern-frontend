@@ -68,7 +68,7 @@ function Auth() {
             )
     
             const currentUser = await response.json()
-            //console.log(currentUser)
+            // console.log(currentUser)
     
             if (currentUser.token) {
                 // sets local storage
